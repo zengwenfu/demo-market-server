@@ -1,0 +1,23 @@
+{
+  "name": "demo-market-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zengwenfu/demo-market-server.git"
+  },
+  "author": "xiaochong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zengwenfu/demo-market-server/issues"
+  },
+  "homepage": "https://github.com/zengwenfu/demo-market-server#readme",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4"
+  }
+}
