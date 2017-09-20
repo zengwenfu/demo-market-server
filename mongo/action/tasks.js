@@ -24,7 +24,7 @@ const saveOrUpdate = (data) => {
           console.log(err)
           reject(err)
         }
-
+        console.log(entity._id)
         resolve(entity._id)
       })
 
