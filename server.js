@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const connectMongo = require('./mongo/connect')
 const userRouter = require('./src/routers/user.js')
 
 
@@ -10,6 +10,7 @@ const userRouter = require('./src/routers/user.js')
 const port = 5001;
 const app = express();
 
+connectMongo()
 app.use(express.static(path.join(__dirname, '/static')));
 
 app.use(bodyParser.json());
