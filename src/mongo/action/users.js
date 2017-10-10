@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const userModel = mongoose.model('Users')
+const mongoose = require('mongoose');
+const userModel = mongoose.model('Users');
 
 module.exports = {
   save(userId, data) {
@@ -9,18 +9,18 @@ module.exports = {
       }).exec((err, model) => {
         // 已经存在此 userid
         if (model) {
-          resolve()
+          resolve();
         } else {
-          data.userId = userId
-          const entity = new userModel(data)
+          data.userId = userId;
+          const entity = new userModel(data);
           entity.save((err) => {
             if (err != null) {
-              console.log(err)
+              console.log(err);
             }
-            resolve(entity._id)
-          })
+            resolve(entity._id);
+          });
         }
-      })
-    })
+      });
+    });
   }
-}
+};

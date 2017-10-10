@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "node server.js"    
+    "serve": "node server.js",
+    "lint:js": "eslint --ext .js src/",
+    "precommit": "npm run lint:js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,9 @@
   "homepage": "https://github.com/zengwenfu/demo-market-server#readme",
   "devDependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.4"
+    "eslint": "^4.8.0",
+    "express": "^4.15.4",
+    "husky": "^0.14.3"
   },
   "dependencies": {
     "mongoose": "^4.11.12"

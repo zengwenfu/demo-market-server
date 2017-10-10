@@ -1,11 +1,11 @@
-const connect = require('./connect')
+const connect = require('./connect');
 
 connect().then(() => {
-  console.log('成功啦~')
+  console.log('成功啦~');
   try {
-    var taskAction = require('./action/tasks')
+    var taskAction = require('./action/tasks');
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 
   const data = {
@@ -13,10 +13,10 @@ connect().then(() => {
     gender: 1,
     desc: '2017/09/20 12:57',
     userId: 'chenyn111'
-  }
+  };
 
   taskAction.saveOrUpdate(data).then((model) => {
-    return model
+    return model;
   }).then((val) => {
     const data = {
       like: false,
@@ -24,9 +24,9 @@ connect().then(() => {
       desc: '2017/09/20 12:57',
       userId: 'chenyn111222',
       _id: val
-    }
-    return taskAction.saveOrUpdate(data)
+    };
+    return taskAction.saveOrUpdate(data);
   }).then((model) => {
-    console.log('修改成功')
-  })
-})
+    console.log('修改成功');
+  });
+});
