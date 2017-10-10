@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
-const connectMongo = require('./mongo/connect')
+const connectMongo = require('./src/mongo/connect')
 const userRouter = require('./src/routers/user.js')
 
 
