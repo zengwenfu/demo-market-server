@@ -1,4 +1,4 @@
-const SparkMD5 = require('spark-md5');
+import SparkMD5 from 'spark-md5';
 
 module.exports = {
   /**

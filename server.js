@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 const connectMongo = require('./src/mongo/connect');
 const userRouter = require('./src/routers/user.js');
 
-
+/**
+ *  注册 babel
+ */
+require('babel-core/register');
 
 const port = 5001;
 const app = express();
