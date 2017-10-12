@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 import { encryptMd5 } from '../utils/encrypt';
+import parseRes from '../utils/parseRes';
 
 /**
  * for test
@@ -17,7 +18,8 @@ router.get('/userinfo', function (req, res, next) {
  *  login
  */
 router.get('/login', (req, res, next) => {
-  res.send(encryptMd5('12345'));
+  // res.send(encryptMd5('12345'));
+  res.send(parseRes.ACCOUNT_INFO_ERROR);
 });
 
 module.exports = router;
