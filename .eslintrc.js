@@ -13,6 +13,7 @@ module.exports = {
     "plugins": [
         "babel"
     ],
+    "parser": "babel-eslint",
     "rules": {
         "indent": [
             "error",
@@ -29,6 +30,7 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "generator-star-spacing": 0
     }
 };
