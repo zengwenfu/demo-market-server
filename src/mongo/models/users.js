@@ -8,10 +8,38 @@ const modelName = 'Users';
 const tableName = 'users';
 
 const tableSchema = new mongoose.Schema({
-  userId: String,
-  like: Boolean,
+  id: String,
+  // 头像
+  avatarUrl: String,
+  // 昵称
+  nickName: String,
+  // email
+  email: String,
+  // pass
+  password: String,
+  // 出生日期
+  birthday: String,
+  //城市
+  city: String,
+  //国家
+  country: String,
+  //性别 0：未知、1：男、2：女
   gender: Number,
-  desc: String
+  //语言
+  language: String,
+  //昵称
+  nickName: String,
+  //省份
+  province: String,
+  //加入时间
+  inTime: String,
+  //更新时间
+  updateTime: String,
+  // 账户
+  account: {
+    score: String,
+    money: String
+  }
 });
 
 // Model  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对

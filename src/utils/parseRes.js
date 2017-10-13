@@ -31,25 +31,6 @@ const errorResult = {};
 for (const key in errorCodes) {
   errorResult[key] = parseError(errorCodes[key].code, errorCodes[key].msg);
 }
-/* 
-* 测试 async/await
-*/
-const sleep = time => {
-  return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      // 返回 ‘ok’
-      resolve('ok');
-    }, time);
-  });
-};
-
-const start = async function () {
-  let result = await sleep(3000);
-  console.log(result); // 收到 ‘ok’
-};
-
-start();
-
 
 export default {
   ...errorResult,
