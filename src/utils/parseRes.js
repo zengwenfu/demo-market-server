@@ -6,13 +6,26 @@ const errorCodes = {
     code: '0001',
     msg: '用户名或密码错误'
   },
-  USERNAME_IS_NEED: {
+  EMAIL_IS_NEED: {
     code: '0002',
-    msg: '用户名不能为空'
+    msg: '邮箱不能为空'
   },
   PASS_IS_NEED: {
     code: '0003',
     msg: '密码不能为空'
+  },
+  USER_EXIST: {
+    code: '0004',
+    msg: '用户已存在'
+  },
+  // needInput 为 true， 将封装成一个方法，需要传入 msg
+  DB_ERROR: {
+    code: '0005',
+    needInput: true
+  },
+  PARAM_PARSE_ERROR: {
+    code: '0006',
+    msg: '参数格式错误'
   }
   /********** add your error code ********************/
 };
@@ -29,7 +42,14 @@ const parseError = function (code, msg) {
 
 const errorResult = {};
 for (const key in errorCodes) {
-  errorResult[key] = parseError(errorCodes[key].code, errorCodes[key].msg);
+  // 返回一个方法
+  if (errorCodes.needInput) {
+    errorResult[key] = (msg) => {
+      return parseError(errorCodes[key].code, msg);
+    };
+  } else {
+    errorResult[key] = parseError(errorCodes[key].code, errorCodes[key].msg);
+  }
 }
 
 export default {
