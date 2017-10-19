@@ -3,6 +3,7 @@ const router = express.Router();
 import { encryptMd5 } from '../utils/encrypt';
 import parseRes from '../utils/parseRes';
 import * as userAction from '../mongo/action/users';
+import captcha from '../utils/captcha';
 
 /**
  * for test
@@ -13,6 +14,34 @@ router.get('/userinfo', function (req, res, next) {
     nickname: '小虫'
   };
   res.send(JSON.stringify(data));
+});
+
+/**
+ * 生成验证码
+ */
+router.get('/captcha', function (req, res, next) {
+  const obj = captcha();
+  req.session.captchaCode = obj.code;
+  res.send(parseRes.parseSuccess({
+    imgData: obj.data
+  }));
+});
+
+/**
+ * 校验验证码
+ */
+router.get('/checkCaptcha', function (req, res, next) {
+  const code = req.param('code');
+  let checked = false;
+  if (code === req.session.captchaCode) {
+    checked = true;
+    req.session.captchaChecked = true;
+  } else {
+    req.session.captchaChecked = false;
+  }
+  res.send(parseRes.parseSuccess({
+    checked
+  }));
 });
 
 /**
