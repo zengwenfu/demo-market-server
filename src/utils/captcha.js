@@ -24,7 +24,7 @@ const generate = function () {
 
 export default function captcha () {
   const  captcha = ccap({
-    width: 160,
+    width: 240,
     height: 60,
     offset: 40,
     quality: 50,

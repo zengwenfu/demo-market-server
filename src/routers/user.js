@@ -33,15 +33,16 @@ router.get('/captcha', function (req, res, next) {
 router.get('/checkCaptcha', function (req, res, next) {
   const code = req.param('code');
   let checked = false;
-  if (code === req.session.captchaCode) {
+  // 不区分大小写
+  if (code.toLocaleLowerCase() === req.session.captchaCode.toLocaleLowerCase()) {
     checked = true;
     req.session.captchaChecked = true;
   } else {
     req.session.captchaChecked = false;
   }
-  res.send(parseRes.parseSuccess({
-    checked
-  }));
+  // 对于验证码错误的不返回 code 0000
+  checked ? res.send(parseRes.parseSuccess({ checked })) : res.send(parseRes.PARAM_PARSE_ERROR);
+  
 });
 
 /**
