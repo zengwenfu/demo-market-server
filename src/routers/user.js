@@ -4,16 +4,23 @@ import { encryptMd5 } from '../utils/encrypt';
 import parseRes from '../utils/parseRes';
 import * as userAction from '../mongo/action/users';
 import captcha from '../utils/captcha';
+import { sendRegister } from '../utils/email';
 
 /**
  * for test
  */
-router.get('/userinfo', function (req, res, next) {
-  const data = {
-    email: '1129330609',
-    nickname: '小虫'
-  };
-  res.send(JSON.stringify(data));
+router.get('/userinfo', function async (req, res, next) {
+  // const data = {
+  //   email: '1129330609',
+  //   nickname: '小虫'
+  // };
+  // res.send(JSON.stringify(data));
+  const obj = sendRegister('1129330609@qq.com', '小虫巨蟹', 'http://www.facemagic888.com');
+  if (obj && obj.err) {
+    res.send(obj.data);
+    return;
+  }
+  res.send(parseRes.parseSuccess({}));
 });
 
 /**

@@ -26,6 +26,10 @@ const errorCodes = {
   PARAM_PARSE_ERROR: {
     code: '0006',
     msg: '参数格式错误'
+  },
+  EMAIL_ERROR: {
+    code: '0006',
+    needInput: true
   }
   /********** add your error code ********************/
 };
