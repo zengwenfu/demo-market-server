@@ -25,6 +25,7 @@ app.use(session({
 connectMongo().then(() => {
   // router 的 require 也要放到 mongo 注册之后，否则导入 modal 有问题
   app.use('/user', require('./src/routers/user.js'));
+  app.use('/weekly', require('./src/routers/weekly.js'));
 }).catch((e) => {
   console.error(e);
 });

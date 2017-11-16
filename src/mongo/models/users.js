@@ -8,7 +8,6 @@ const modelName = 'Users';
 const tableName = 'users';
 
 const tableSchema = new mongoose.Schema({
-  id: String,
   // 头像
   avatarUrl: String,
   // 昵称
