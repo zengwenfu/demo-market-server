@@ -16,8 +16,8 @@ module.exports = () => {
       resolve();
     });
 
-    console.log('ohohoh');
     require('./models/users');
     require('./models/tasks');
+    require('./models/weekly');
   });
 };
