@@ -9,6 +9,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const connectMongo = require('./src/mongo/connect');
+const adminCheckMiddleware = require('./src/middleware/adminCheck');
 
 const port = 5001;
 const app = express();
@@ -23,6 +24,9 @@ app.use(session({
 }));
 
 connectMongo().then(() => {
+  // 管理员权限拦截
+  app.use('/weekly/admin/*', adminCheckMiddleware);
+
   // router 的 require 也要放到 mongo 注册之后，否则导入 modal 有问题
   app.use('/user', require('./src/routers/user.js'));
   app.use('/weekly', require('./src/routers/weekly.js'));

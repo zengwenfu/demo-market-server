@@ -36,8 +36,7 @@ export async function findUser (email, password) {
 /**
  * 更新用户信息
  */
-
- export async function updateUser (email, sets) {
-   const data = await mongoUtil.update(userModel, { email: email }, sets)
-   return data;
- }
+export async function updateUser (email, sets) {
+  const data = await mongoUtil.update(userModel, { email: email }, sets);
+  return data;
+}

@@ -30,6 +30,22 @@ const errorCodes = {
   EMAIL_ERROR: {
     code: '0006',
     needInput: true
+  },
+  NO_WEEKLY_PUBLISH_TIME: {
+    code: '0007',
+    msg: '周一才能发布周报'
+  },
+  WEEKLY_UN_PUBLISH: {
+    code: '0008',
+    msg: '周报未发布'
+  },
+  NO_LOGIN: {
+    code: '0009',
+    msg: '未登录'
+  },
+  NO_ADMIN: {
+    code: '0010',
+    msg: '没有权限'
   }
   /********** add your error code ********************/
 };

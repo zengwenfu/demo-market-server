@@ -42,7 +42,9 @@ const tableSchema = new mongoose.Schema({
   account: {
     score: String,
     money: String
-  }
+  },
+  // 1 为管理员
+  role: String
 });
 
 // Model  由Schema发布生成的模型，具有抽象属性和行为的数据库操作对

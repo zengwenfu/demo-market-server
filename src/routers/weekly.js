@@ -4,9 +4,45 @@ import parseRes from '../utils/parseRes';
 import * as weeklyAction from '../mongo/action/weekly';
 
 /**
+ *  查询所有已发布
+ */
+router.get('/findWeeklys', async (req, res, next) => {
+  const data = await weeklyAction.findWeeklys();
+  // 如果有错误
+  if (data && data.err) {
+    res.send(data.data);
+    return;
+  }
+  
+  res.send(parseRes.parseSuccess(data));
+});
+
+/**
+ *  根据 id 查询
+ */
+router.get('/findById', async (req, res, next) => {
+  const id = req.param('id');
+  const data = await weeklyAction.findById(id);
+
+  // 如果有错误
+  if (data && data.err) {
+    res.send(data.data);
+    return;
+  }
+  
+  // 如果未发布
+  if (data && !data.isPublish) {
+    res.send(parseRes.WEEKLY_UN_PUBLISH);
+    return;
+  }
+
+  res.send(parseRes.parseSuccess(data));
+});
+
+/**
  *  添加或保存
  */
-router.post('/saveOrUpdate', async (req, res, next) => {
+router.post('/admin/saveOrUpdate', async (req, res, next) => {
   /**
    * 获取参数
    */
@@ -31,7 +67,7 @@ router.post('/saveOrUpdate', async (req, res, next) => {
 /**
  *  查询未发布
  */
-router.get('/findUnPub', async (req, res, next) => {
+router.get('/admin/findUnPub', async (req, res, next) => {
   const data = await weeklyAction.findUnPub();
   // 如果有错误
   if (data && data.err) {
@@ -42,24 +78,16 @@ router.get('/findUnPub', async (req, res, next) => {
   res.send(parseRes.parseSuccess(data));
 });
 
-/**
- *  查询所有已发布
- */
-router.get('/findWeeklys', async (req, res, next) => {
-  const data = await weeklyAction.findWeeklys();
-  // 如果有错误
-  if (data && data.err) {
-    res.send(data.data);
-    return;
-  }
-  
-  res.send(parseRes.parseSuccess(data));
-});
 
 /**
  *  publish
  */
-router.get('/publish', async (req, res, next) => {
+router.post('/admin/publish', async (req, res, next) => {
+  // 周报只在周一才能操作发布
+  if (new Date().getDay() !== 1) {
+    res.send(parseRes.NO_WEEKLY_PUBLISH_TIME);
+    return;
+  }
   /**
    * 获取参数
    */

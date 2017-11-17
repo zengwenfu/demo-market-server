@@ -64,16 +64,16 @@ router.post('/decipher', async (req, res, next) => {
   const [email, endTime] = decipher(params.token).split(',');
   const userMessage = await userAction.findUser(email);
   if(userMessage.isActive) {
-      return res.send(parseRes.parseError('0005', '该邮箱已被注册，请重新注册'));
+    return res.send(parseRes.parseError('0005', '该邮箱已被注册，请重新注册'));
   }
   const nowTime = new Date().getTime();
   if(nowTime > endTime) {
-      return res.send(parseRes.parseError('0006', '已过期，请重新发送邮件'));
+    return res.send(parseRes.parseError('0006', '已过期，请重新发送邮件'));
   }
   const sets = { isActive: true };
   const data = await userAction.updateUser(email, sets);
   res.send(parseRes.parseSuccess(data));
-})
+});
 /**
  * register
  */
@@ -125,7 +125,7 @@ router.post('/register', async (req, res, next) => {
   }
   
   res.send(parseRes.parseSuccess(data));
-})
+});
 
 /**
  *  login
@@ -165,20 +165,25 @@ router.post('/login', async (req, res, next) => {
   const data = await userAction.findUser(params.email, pass);
   // 如果有错误
   if (data && data.err) {
-      res.send(data.data);
-      return;
+    res.send(data.data);
+    return;
   }
   if (data === null) {
-      return res.send(parseRes.ACCOUNT_INFO_ERROR);
+    return res.send(parseRes.ACCOUNT_INFO_ERROR);
   }
   if (data.isActive && !data.isActive) {
-      return res.send(parseRes.parseError('0001', '此用户尚未激活，请先激活！'));
+    return res.send(parseRes.parseError('0001', '此用户尚未激活，请先激活！'));
   }
 
   delete data.password;
 
-  // TODO 将用户信息加入 session 中
-  req.session.user = data;
+  const userinfo = {
+    _id: data._id,
+    role: data.role || '0',
+    email: data.email
+  };
+
+  req.session.userinfo = userinfo;
 
   res.send(parseRes.parseSuccess(data));
 });
