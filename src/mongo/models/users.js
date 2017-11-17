@@ -35,6 +35,10 @@ const tableSchema = new mongoose.Schema({
   inTime: String,
   //更新时间
   updateTime: String,
+  // 邮箱 token
+  emailToken: String,
+  // 是否激活
+  isActive: Boolean,
   // 账户
   account: {
     score: String,
