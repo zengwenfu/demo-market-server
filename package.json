@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "node server.js",
+    "dev": "cross-env NODE_ENV=dev node server.js",
     "lint:js": "eslint --ext .js src/",
     "precommit": "npm run lint:js"
   },
@@ -26,6 +27,7 @@
     "babel-preset-env": "^1.6.0",
     "body-parser": "^1.17.2",
     "ccap": "^0.6.10",
+    "cross-env": "^5.1.1",
     "eslint": "^4.8.0",
     "eslint-plugin-babel": "^4.1.2",
     "express": "^4.15.4",

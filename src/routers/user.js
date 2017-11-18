@@ -118,7 +118,8 @@ router.post('/register', async (req, res, next) => {
     res.send(data.data);
     return;
   }
-  const obj = await sendRegister('554793916@qq.com', '小虫巨蟹', 'http://127.0.0.1:3000/dist/loginSuccess.html?token=' + cipherRes);
+  console.log(params);
+  const obj = await sendRegister(params.email, params.nickName, `${process.env.domain}/loginSuccess.html?token=${cipherRes}`);
   if (obj && obj.err) {
     res.send(obj.data);
     return;
