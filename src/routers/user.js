@@ -7,15 +7,11 @@ import captcha from '../utils/captcha';
 import { sendRegister } from '../utils/email';
 
 /**
- * for test
+ * get UserInfo
  */
 router.get('/userinfo', function async (req, res, next) {
-  const obj = sendRegister('554793916@qq.com', '小虫巨蟹', 'http://www.facemagic888.com');
-  if (obj && obj.err) {
-    res.send(obj.data);
-    return;
-  }
-  res.send(parseRes.parseSuccess({}));
+  const userInfo = req.session.userInfo || {};
+  res.send(parseRes.parseSuccess(userInfo));
 });
 /**
  * 生成验证码
@@ -178,13 +174,13 @@ router.post('/login', async (req, res, next) => {
 
   delete data.password;
 
-  const userinfo = {
+  const userInfo = {
     _id: data._id,
     role: data.role || '0',
     email: data.email
   };
 
-  req.session.userinfo = userinfo;
+  req.session.userInfo = userInfo;
 
   res.send(parseRes.parseSuccess(data));
 });

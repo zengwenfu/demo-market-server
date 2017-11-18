@@ -63,7 +63,7 @@ const parseError = function (code, msg) {
 const errorResult = {};
 for (const key in errorCodes) {
   // 返回一个方法
-  if (errorCodes.needInput) {
+  if (errorCodes[key].needInput) {
     errorResult[key] = (msg) => {
       return parseError(errorCodes[key].code, msg);
     };

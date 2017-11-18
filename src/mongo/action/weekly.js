@@ -31,7 +31,10 @@ export async function saveOrUpdate (data) {
     const id = data._id;
     delete data._id;
     data.updateTime = dateUtil.format(new Date());
-    return await mongoUtil.update(weeklyModel, {_id: id}, { '$set': data });
+    const res = await mongoUtil.update(weeklyModel, {_id: id}, { '$set': data });
+    if (res.err) return res;
+    const query = weeklyModel.findOne({ _id: id });
+    return await mongoUtil.exec(query);
   }
 }
 
@@ -42,7 +45,8 @@ export async function findWeeklys () {
   const query = weeklyModel.find({ isPublish: true }).sort({ _id: 'desc' }).select({
     _id: 1,
     num: 1,
-    summary: 1
+    summary: 1,
+    publishTime: 1
   });
   const data = await mongoUtil.exec(query);
   return data;
