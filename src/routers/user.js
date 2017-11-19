@@ -114,14 +114,7 @@ router.post('/register', async (req, res, next) => {
     res.send(data.data);
     return;
   }
-  console.log(process.env.domain);
-  let obj;
-  try {
-    obj = await sendRegister(params.email, params.nickName, `${process.env.domain}/loginSuccess.html?token=${cipherRes}`);
-  } catch (e) {
-    console.log(e);
-  }
-  console.log(obj);
+  const obj = await sendRegister(params.email, params.nickName, `${process.env.domain}/loginSuccess.html?token=${cipherRes}`);
   if (obj && obj.err) {
     res.send(obj.data);
     return;
