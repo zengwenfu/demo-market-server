@@ -12,7 +12,7 @@ import parseRes from './parseRes';
 export function send (to, subject, content) {
   const transporter = nodemailer.createTransport({  
     host: 'smtpdm.aliyun.com',
-    port: 25,
+    port: 465,
     secureConnection: true, // use SSL
     auth: {  
       user: 'feili@facemagic888.com',  
