@@ -36,9 +36,10 @@ export function send (to, subject, content) {
   return new Promise ((resolve, reject) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.log(error);
         resolve({
           err: true,
-          data: parseRes.EMAIL_ERROR(err.toString())
+          data: parseRes.EMAIL_ERROR(error.toString())
         });
         return;
       }

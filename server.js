@@ -14,7 +14,7 @@ const adminCheckMiddleware = require('./src/middleware/adminCheck');
 const port = 5001;
 const app = express();
 
-process.env.domain = process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/dist' : 'https://dm.facemagic888.com';
+process.env.domain = process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/dist' : 'http://dm.facemagic888.com';
 
 app.use(express.static(path.join(__dirname, '/static')));
 
