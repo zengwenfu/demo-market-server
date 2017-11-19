@@ -95,10 +95,10 @@ router.get('/admin/findUnPub', async (req, res, next) => {
  */
 router.post('/admin/publish', async (req, res, next) => {
   // 周报只在周一才能操作发布
-  // if (new Date().getDay() !== 1) {
-  //   res.send(parseRes.NO_WEEKLY_PUBLISH_TIME);
-  //   return;
-  // }
+  if (new Date().getDay() !== 1) {
+    res.send(parseRes.NO_WEEKLY_PUBLISH_TIME);
+    return;
+  }
   /**
    * 获取参数
    */
