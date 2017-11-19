@@ -32,8 +32,10 @@
     "eslint-plugin-babel": "^4.1.2",
     "express": "^4.15.4",
     "express-session": "^1.15.6",
+    "express-zip": "^2.0.1",
     "husky": "^0.14.3",
     "nodemailer": "^4.3.1",
+    "nunjucks": "^3.0.1",
     "spark-md5": "^3.0.0"
   },
   "dependencies": {

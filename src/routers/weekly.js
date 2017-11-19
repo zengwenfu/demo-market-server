@@ -3,6 +3,16 @@ const router = express.Router();
 import parseRes from '../utils/parseRes';
 import * as weeklyAction from '../mongo/action/weekly';
 import dateUtil from '../utils/dateUtil';
+import nunjucks from 'nunjucks';
+import fs from 'fs';
+import { createFile } from '../utils/file';
+import 'express-zip';
+
+function buildMdFile (data) {
+  const content = nunjucks.render('./src/config/md.tpl', {num: data.num, columns: data.columns, summary: data.summary});
+  const fileName = `./md/${data.num}.md`;
+  createFile(fileName, content);
+}
 
 /**
  *  查询所有已发布
@@ -61,7 +71,7 @@ router.post('/admin/saveOrUpdate', async (req, res, next) => {
     res.send(data.data);
     return;
   }
-  
+  buildMdFile(data);
   res.send(parseRes.parseSuccess(data));
 });
 
@@ -115,6 +125,17 @@ router.post('/admin/publish', async (req, res, next) => {
   
   res.send(parseRes.parseSuccess(data));
 
+});
+
+/**
+ *  download
+ */
+router.get('/admin/download', async (req, res, next) => {
+  const num = req.param('num');
+  res.zip([{ path: `./md/${num}.md`, name: `${num}.md` }], `${num}.zip`, (err, d) => {
+    console.log('---- send zip callback -----');
+    res.end();
+  });
 });
 
 module.exports = router;
