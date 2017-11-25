@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 import parseRes from '../utils/parseRes';
 import * as weeklyAction from '../mongo/action/weekly';
+import { findAdminEmails } from '../mongo/action/users';
 import dateUtil from '../utils/dateUtil';
 import nunjucks from 'nunjucks';
 import fs from 'fs';
 import { createFile } from '../utils/file';
 import 'express-zip';
+import { sendNotice } from '../utils/email';
 
 function buildMdFile (data) {
   const content = nunjucks.render('./src/config/md.tpl', {num: data.num, columns: data.columns, summary: data.summary});
@@ -136,6 +138,15 @@ router.get('/admin/download', async (req, res, next) => {
     console.log('---- send zip callback -----');
     res.end();
   });
+});
+
+/**
+ * send Notice
+ */
+router.get('/admin/sendNotice', async (req, res, next) => {
+  const emails = await findAdminEmails();
+  sendNotice(emails);
+  res.send(parseRes.parseSuccess(emails));
 });
 
 module.exports = router;

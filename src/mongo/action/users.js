@@ -40,3 +40,14 @@ export async function updateUser (email, sets) {
   const data = await mongoUtil.update(userModel, { email: email }, sets);
   return data;
 }
+
+/**
+ *  查询管理员邮箱
+ */
+export async function findAdminEmails () {
+  const query = userModel.find({ role: '1'}).select({
+    email: 1,
+    nickName: 1
+  });
+  return await mongoUtil.exec(query);
+}

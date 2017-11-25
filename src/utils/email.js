@@ -63,4 +63,48 @@ export async function sendRegister (to, name, checkUrl) {
   return await send(to, '注册验证--菲麦', content);
 };
 
+function buildNoticeEmail (name = '骚年') {
+  let day = new Date().getDay();
+  switch (day) {
+  case 0: 
+    day = '周日';
+    break;
+  case 1:
+    day = '周一';
+    break;
+  case 2:
+    day = '周二';
+    break;
+  case 3:
+    day = '周三';
+    break;
+  case 4:
+    day = '周四';
+    break;
+  case 5:
+    day = '周五';
+    break;
+  case 6:
+    day = '周六';
+  }
+  const content = `
+    <p>${name}同学:</p>
+    <p>今天是<span style="font-weight: bold;">${day}</span>洛</p>
+    <p>嫑忘记到菲麦前端周刊录入精选文章，集齐七篇文章，菲麦就可以召唤神龙，还不快快行动起来！！！</p>
+    <p></p>
+    <p>如果你已经录入过文章了，要不然再来一篇吧，小菲送你一个飞吻~~</p>
+    <p></p>
+    <p><a href="http://dm.facemagic888.com/weekly-admin.html">点此前往</a></p>
+  `;
+  return content;
+}
+
+export function sendNotice (emails) {
+  for (let i = 0; i < emails.length; i++) {
+    const email = emails[i];
+    const content = buildNoticeEmail(email.nickName);
+    send(email.email, '发文提醒--菲麦', content);
+  }
+}
+
 
